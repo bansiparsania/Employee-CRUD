@@ -1,5 +1,6 @@
 .content {
   padding-top: 10px;
+  margin: 5px 15px;
 }
 .row {
   display: flex;
@@ -15,4 +16,11 @@
   button {
     flex: 1;
   }
+}
+.errors{
+  margin:0px 26px 20px;
+  padding: 5px 0px;
+}
+.errormessage{
+  margin: 8px 15px;
 }

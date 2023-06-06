@@ -1,17 +1,23 @@
 <div mat-dialog-title>
     <h1>Employee Form</h1>
 </div>
+<div *ngIf="errorMessage" class="text-danger errors" [ngStyle]="{backgroundColor : errorMessage != null ? '#FADBD8' : '#FFF'}">
+    <div *ngFor="let error of errorMessage.split(',')" class="errormessage">
+        <span [ngStyle]="{color: error != null ? 'red' : 'white'}">{{ error }}</span>
+    </div>
+</div>
+
 <form [formGroup]="empForm" (ngSubmit)="onFormSubmit()">
     <div mat-dialog-content class="content">
         <div class="row">
             <mat-form-field appearance="outline">
                 <mat-label>First name</mat-label>
-                <input matInput type="text" placeholder="Ex. Technical" formControlName="firstName">
+                <input matInput type="text" placeholder="Ex. test" formControlName="firstName">
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Last Name</mat-label>
-                <input matInput placeholder="Ex. Babaji" formControlName="lastName">
+                <input matInput placeholder="Ex. test" formControlName="lastName">
             </mat-form-field>
         
             <mat-form-field appearance="outline">

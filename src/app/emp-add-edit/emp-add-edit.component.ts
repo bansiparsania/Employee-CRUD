@@ -24,13 +24,14 @@ export class EmpAddEditComponent implements OnInit {
       firstName: '',
       lastName: '',
       email: '',
-      contact: '',
+      contact: 0,
       userName: '',
       password: '',
       action:'',
     });
   
   }
+  errorMessage: string = '';
 
   ngOnInit(): void {
     this.empForm.patchValue(this.data);
@@ -48,6 +49,7 @@ export class EmpAddEditComponent implements OnInit {
             },
             error: (err: any) => {
               console.error(err);
+              this.handleApiError(err);
             },
           });
       } else {
@@ -58,9 +60,27 @@ export class EmpAddEditComponent implements OnInit {
           },
           error: (err: any) => {
             console.error(err);
+            this.handleApiError(err);
           },
         });
       }
     }
   }
+
+
+  handleApiError(error: any) {
+    if (error.status === 400 && error.error) {
+      const validationErrors = error.error;
+      this.errorMessage = '';
+  
+      for (const fieldName in validationErrors) {
+        if (validationErrors.hasOwnProperty(fieldName)) {
+          const fieldErrors = validationErrors[fieldName];
+          this.errorMessage += `${fieldName} ${fieldErrors.join(',')} `;
+        }
+      }
+    }
+  }
 }
+
+
